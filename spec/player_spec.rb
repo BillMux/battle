@@ -2,9 +2,31 @@ require 'player'
 
 describe Player do
 
-  it 'has a name' do
-    player_one = Player.new('Bill')
-    expect(player_one.name).to eq('Bill')
+  subject(:bill) { Player.new('Bill') }
+  subject(:opponent) { Player.new('Opponent') }
+
+  describe '#name' do
+    it 'has a name' do
+      expect(bill.name).to eq('Bill')
+    end
   end
 
+  describe '#hitpoints' do
+    it 'returns hitpoints' do
+      expect(bill.hitpoints).to eq described_class::DEFAULT_HP
+    end
+  end
+
+  describe '#attack' do
+    it 'can attack opponent' do
+      bill.attack(opponent)
+      allow(opponent).to receive(:damage)
+    end
+  end
+
+  describe '#damage' do
+    it 'receives damage when attacked' do
+      expect{ opponent.damage }.to change{ opponent.hitpoints }.by -10
+    end
+  end
 end
