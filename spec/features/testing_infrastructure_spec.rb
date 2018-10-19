@@ -29,11 +29,11 @@ feature 'attack' do
     expect(page).to have_content('Bill attacked Someone')
   end
 
-  scenario 'player two receives damage' do
+  scenario 'reduces player two HP by 10' do
     sign_in_and_play
     click_link 'Attack'
-    # $player_two.damage
-    expect(page).not_to have_content "Someone: 100HP"
-    expect(page).to have_content "Someone: 90HP"
+    $player_two.damage
+    expect(page).not_to have_content "Someone:\n100HP"
+    expect(page).to have_content "Someone:\n90HP"
   end
 end

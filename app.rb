@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require_relative './lib/player.rb'
+require './spec/features/web_helpers.rb'
 
 class Battle < Sinatra::Base
   enable :sessions
@@ -15,22 +16,21 @@ class Battle < Sinatra::Base
   end
 
   get '/play' do
-    @player_one_name = $player_one.name
-    @player_one_hp = $player_one.hitpoints
-    @player_two_name = $player_two.name
-    @player_two_hp = $player_two.hitpoints
+    @player_one = $player_one
+    @player_two = $player_two
     erb :play
   end
 
   get '/play' do
-    @player_one_name = $player_one.name
-    @player_two_name = $player_two.name
+    @player_one = $player_one
+    @player_two = $player_two
     redirect '/attack'
   end
 
   get '/attack' do
-    @player_one_name = $player_one.name
-    @player_two_name = $player_two.name
+    @player_one = $player_one
+    @player_two = $player_two
+    @player_one.attack(@player_two)
     erb :attack
   end
 

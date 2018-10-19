@@ -13,7 +13,7 @@ describe Player do
 
   describe '#hitpoints' do
     it 'returns hitpoints' do
-      expect(bill.hitpoints).to eq described_class::DEFAULT_HP
+      expect(bill.hp).to eq described_class::DEFAULT_HP
     end
   end
 
@@ -26,7 +26,7 @@ describe Player do
 
   describe '#damage' do
     it 'receives damage when attacked' do
-      expect{ opponent.damage }.to change{ opponent.hitpoints }.by -10
+      expect{ opponent.damage }.to change{ opponent.hp }.by -10
     end
   end
 end
